@@ -1,14 +1,25 @@
+import * as dotenv from 'dotenv';
+dotenv.config();
+
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { User } from '../users/entities/user.entity';
 
 export const databaseConfig: TypeOrmModuleOptions = {
   type: 'postgres',
-  host: process.env.DB_HOST || 'localhost',
-  port: parseInt(process.env.DB_PORT) || 5432,
+  host: process.env.DB_HOST || '127.0.0.1',
+  port: 5433,
   username: process.env.DB_USERNAME || 'taskflow_user',
-  password: process.env.DB_PASSWORD || 'taskflow_password',
+  password: process.env.DB_PASSWORD || 'Sofi2009',
   database: process.env.DB_NAME || 'taskflow_db',
-  
+  ...(() => {
+    console.log('👉 DB config being used:');
+    console.log('DB_HOST:', process.env.DB_HOST);
+    console.log('DB_PORT:', process.env.DB_PORT);
+    console.log('DB_USERNAME:', process.env.DB_USERNAME);
+    console.log('DB_PASSWORD:', process.env.DB_PASSWORD);
+    console.log('DB_NAME:', process.env.DB_NAME);
+    return {};
+  })(),
   // 🏗️ Entidades
   entities: [User],
   

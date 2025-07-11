@@ -4,7 +4,14 @@ import {
   IsNotEmpty,
   MinLength,
   IsOptional,
+  IsEnum,
 } from 'class-validator';
+
+export enum UserRole {
+  USER = 'user',
+  ADMIN = 'admin',
+  MANAGER = 'manager',
+}
 
 export class CreateUserDto {
   @IsString()
@@ -25,4 +32,8 @@ export class CreateUserDto {
   @IsString()
   @IsOptional()
   readonly avatar?: string;
+
+  @IsEnum(UserRole)
+  @IsOptional()
+  readonly role?: UserRole = UserRole.USER;
 }

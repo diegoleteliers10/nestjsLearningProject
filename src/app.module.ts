@@ -5,6 +5,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { databaseConfig } from './config/database.config';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -13,12 +14,11 @@ import { databaseConfig } from './config/database.config';
       isGlobal: true, // Hace las variables disponibles en toda la app
       envFilePath: ['.env.local', '.env'], // Archivos de entorno
     }),
-    
     // 🐘 Configuración de TypeORM
     TypeOrmModule.forRoot(databaseConfig),
-    
     // 📦 Módulos de la aplicación
     UsersModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
